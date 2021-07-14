@@ -4,7 +4,7 @@ const db = require("./db/db.json")
 const uniqid = require('uniqid');
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -37,7 +37,7 @@ app.post("/api/notes", (req,res)=>{
     db.push(newItem)
     res.redirect("/notes")
 });
-app.get("*", (req,res)=>{
+app.get("/", (req,res)=>{
     res.sendFile(path.join(__dirname, "./public/index.html"))
 });
 
